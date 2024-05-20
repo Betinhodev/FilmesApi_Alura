@@ -14,5 +14,7 @@ namespace FilmesApi.Models
 
         public virtual Endereco Endereco { get; set; }
 
+        public virtual ICollection<Sessao> Sessoes { get; set; } 
+
     }
 }

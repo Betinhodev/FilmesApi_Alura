@@ -39,9 +39,16 @@ namespace FilmesApi.Controllers
 
         [HttpGet]
 
-        public IEnumerable<ReadFilmeDto> ConsultaTodosFilmes()
+        public IEnumerable<ReadFilmeDto> ConsultaTodosFilmes([FromQuery] string? nomeCinema = null)
         {
-            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes);
+            if(nomeCinema == null)
+            {
+                return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes);
+            }
+
+            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes
+                .Where(filme => filme.Sessoes
+                .Any(sessao => sessao.Cinema.Nome == nomeCinema)));
         }
         
         [HttpGet("{id}")]
