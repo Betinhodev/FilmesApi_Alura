@@ -48,7 +48,7 @@ namespace FilmesApi.Controllers
 
             return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes
                 .Where(filme => filme.Sessoes
-                .Any(sessao => sessao.Cinema.Nome == nomeCinema)));
+                .Any(sessao => sessao.Cinema.Nome == nomeCinema)).ToList());
         }
         
         [HttpGet("{id}")]
